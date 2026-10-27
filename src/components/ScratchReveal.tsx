@@ -12,7 +12,7 @@ import { SectionHeading } from "./Ornament";
 import { Reveal } from "./Reveal";
 
 // 👉 Your scratch card image (white circle centers)
-import scratchBackground from "@/assets/scratch-background.jpg";
+import scratchBackground from "@/assets/scratch-background.png";
 
 /**
  * IMAGE GEOMETRY (in image pixels)
