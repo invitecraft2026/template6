@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { wedding } from "@/config/wedding";
-import countdownBg from "@/assets/countdown-bg.jpg";
+import countdownBg from "@/assets/countdown-bg-vertical.png";
 
 import { Reveal } from "./Reveal";
 
@@ -54,11 +54,15 @@ function getTimeLeft(targetDate: string) {
   };
 }
 
+/** Vertical position of the text block on the image (50 = exact center).
+ *  Lower it to move the text up, raise it to move the text down. */
+const CONTENT_Y = 50;
+
 const numberClass =
-  "tabular text-2xl font-light leading-none text-[#4d1f29] sm:text-4xl";
+  "tabular font-light leading-none text-[#4d1f29]";
 
 const labelClass =
-  "mt-1.5 text-[0.45rem] font-medium uppercase tracking-[0.18em] text-[#a7833d] sm:mt-2 sm:text-[0.62rem]";
+  "font-medium uppercase text-[#a7833d]";
 
 export function SaveTheDate() {
   const [timeLeft, setTimeLeft] = useState(() =>
@@ -81,51 +85,78 @@ export function SaveTheDate() {
   ];
 
   return (
-    <section className="relative overflow-hidden bg-[#f2ebe1] px-0 py-6 sm:px-6 sm:py-16">
-      {/* 4:3 on mobile (sides crop evenly, ribbon frame stays visible),
-          16:9 on larger screens (the full image) */}
-      <div className="relative mx-auto aspect-[4/3] w-full overflow-hidden sm:aspect-[16/9] sm:max-w-3xl">
+    <section className="relative overflow-hidden bg-[#f2ebe1] px-6 py-10 sm:py-16">
+      {/* The image decides the height, so the whole design is always visible.
+          Change max-w to make it bigger or smaller. Text sizes use cqw
+          (1cqw = 1% of this box's width), so they scale with the image. */}
+      <div
+        className="relative mx-auto w-full max-w-[20rem] sm:max-w-[24rem]"
+        style={{ containerType: "inline-size" }}
+      >
         {/* Background image */}
         <img
           src={countdownBg}
           alt=""
           aria-hidden="true"
           draggable={false}
-          className="absolute inset-0 h-full w-full select-none object-cover object-center"
+          className="pointer-events-none block h-auto w-full select-none"
         />
 
         {/* Content, centered inside the ribbon frame */}
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="w-[70%] text-center sm:w-[52%]">
-            <Reveal>
-              <h3 className="font-script text-2xl leading-tight text-[#4d1f29] sm:text-5xl">
-                The Celebration Begins
-              </h3>
-            </Reveal>
+        <div
+          className="absolute left-1/2 text-center"
+          style={{
+            top: `${CONTENT_Y}%`,
+            width: "72cqw",
+            translate: "-50% -50%",
+          }}
+        >
+          <Reveal>
+            <h3
+              className="font-script text-balance leading-[1.1] text-[#4d1f29]"
+              style={{ fontSize: "8.5cqw" }}
+            >
+              The Celebration Begins
+            </h3>
+          </Reveal>
 
-            <Reveal delay={0.1}>
-              <div className="mt-3 grid grid-cols-4 sm:mt-7">
-                {units.map((u, i) => (
-                  <div
-                    key={u.label}
-                    className={`px-1 ${
-                      i > 0 ? "border-l border-[#b8934a]/40" : ""
-                    }`}
+          <Reveal delay={0.1}>
+            <div
+              className="grid grid-cols-4"
+              style={{ marginTop: "4cqw" }}
+            >
+              {units.map((u, i) => (
+                <div
+                  key={u.label}
+                  className={i > 0 ? "border-l border-[#b8934a]/40" : ""}
+                >
+                  <p className={numberClass} style={{ fontSize: "7.5cqw" }}>
+                    {u.value}
+                  </p>
+                  <p
+                    className={labelClass}
+                    style={{
+                      fontSize: "max(6px, 1.9cqw)",
+                      letterSpacing: "0.12em",
+                      marginTop: "1.6cqw",
+                    }}
                   >
-                    <p className={numberClass}>{u.value}</p>
-                    <p className={labelClass}>{u.label}</p>
-                  </div>
-                ))}
-              </div>
-            </Reveal>
+                    {u.label}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </Reveal>
 
-            <Reveal delay={0.2}>
-              {/* Time line */}
-              <p className="mt-3 text-[0.6rem] font-medium italic text-[#702b3b] sm:mt-7 sm:text-sm">
-                {wedding.time}
-              </p>
-            </Reveal>
-          </div>
+          <Reveal delay={0.2}>
+            {/* Time line */}
+            <p
+              className="font-medium italic text-[#702b3b]"
+              style={{ fontSize: "max(9px, 3cqw)", marginTop: "4cqw" }}
+            >
+              {wedding.time}
+            </p>
+          </Reveal>
         </div>
       </div>
     </section>

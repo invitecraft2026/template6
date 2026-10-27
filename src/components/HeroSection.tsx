@@ -71,7 +71,7 @@ export function HeroSection({ start }: { start: boolean }) {
           style={{
             left: `${(OVAL_CX / IMG_W) * 100}%`,
             top: `${(OVAL_CY / IMG_H) * 100}%`,
-            width: "52cqw",
+            width: "56cqw",
             translate: "-50% -50%",
           }}
         >
@@ -98,8 +98,9 @@ export function HeroSection({ start }: { start: boolean }) {
 
           <div
             className="flex flex-col items-center"
-            style={{ marginTop: "1.8cqw" }}
+            style={{ marginTop: "2.4cqw" }}
           >
+            {/* Bride */}
             <h2
               className="font-script leading-none text-[#4d1f29]"
               style={{ fontSize: "10.5cqw" }}
@@ -107,19 +108,42 @@ export function HeroSection({ start }: { start: boolean }) {
               {wedding.bride.firstName}
             </h2>
 
+            <p
+              className="text-balance mx-auto font-medium italic leading-snug text-[#3f4a2c]"
+              style={{
+                fontSize: "max(8px, 2.3cqw)",
+                marginTop: "1.6cqw",
+                maxWidth: "40cqw",
+              }}
+            >
+              {wedding.bride.parents}
+            </p>
+
             <span
               className="font-script text-[#8a6a1c]"
-              style={{ fontSize: "5.2cqw", margin: "-0.6cqw 0" }}
+              style={{ fontSize: "5.2cqw", margin: "1.6cqw 0 0.6cqw" }}
             >
               &amp;
             </span>
 
+            {/* Groom */}
             <h2
               className="font-script leading-none text-[#4d1f29]"
               style={{ fontSize: "10.5cqw" }}
             >
               {wedding.groom.firstName}
             </h2>
+
+            <p
+              className="text-balance mx-auto font-medium italic leading-snug text-[#3f4a2c]"
+              style={{
+                fontSize: "max(8px, 2.3cqw)",
+                marginTop: "1.6cqw",
+                maxWidth: "40cqw",
+              }}
+            >
+              {wedding.groom.parents}
+            </p>
           </div>
         </motion.div>
 

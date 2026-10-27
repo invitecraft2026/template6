@@ -1,6 +1,6 @@
 import { wedding } from "@/config/wedding";
 import { useCountdown } from "@/hooks/useCountdown";
-import countdownBg from "@/assets/countdown-bg.jpg";
+import countdownBg from "@/assets/countdown-bg-vertical.jpg";
 
 import { Reveal } from "./Reveal";
 
