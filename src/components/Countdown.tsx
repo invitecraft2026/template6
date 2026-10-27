@@ -1,8 +1,7 @@
 import { wedding } from "@/config/wedding";
 import { useCountdown } from "@/hooks/useCountdown";
-import countdownBg from "@/assets/countdown-bg-landscape.jpg";
+import countdownBg from "@/assets/countdown-bg.jpg";
 
-import { SectionHeading } from "./Ornament";
 import { Reveal } from "./Reveal";
 
 const pad = (n: number) => n.toString().padStart(2, "0");
@@ -25,48 +24,57 @@ export function Countdown() {
       ];
 
   return (
-    <section className="px-0 py-6 sm:px-6 sm:py-16">
-      <div className="relative mx-auto flex min-h-[320px] w-full items-center justify-center overflow-hidden sm:aspect-[16/9] sm:max-w-3xl">
+    <section className="bg-[#f2ebe1] px-0 py-6 sm:px-6 sm:py-16">
+      {/* 4:3 on mobile (crops the sides evenly, ribbon frame stays visible),
+          16:9 on larger screens (the full image) */}
+      <div className="relative mx-auto aspect-[4/3] w-full overflow-hidden sm:aspect-[16/9] sm:max-w-3xl">
         {/* Background image */}
         <img
           src={countdownBg}
           alt=""
           aria-hidden="true"
-          className="absolute inset-0 h-full w-full object-cover"
+          draggable={false}
+          className="absolute inset-0 h-full w-full select-none object-cover object-center"
         />
 
-        {/* Content */}
-        <div className="relative z-10 w-full max-w-md px-10 py-12 sm:px-16">
-          <Reveal>
-            <SectionHeading
-              eyebrow="Counting the moments"
-              title="The Celebration Begins In"
-            />
-          </Reveal>
-
-          <Reveal delay={0.1}>
-            {c?.isPast ? (
-              <p className="font-script mt-8 text-center text-4xl text-champagne drop-shadow-[0_2px_8px_rgba(0,0,0,0.45)]">
-                Today Is The Day ♡
+        {/* Content, centered inside the ribbon frame */}
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="w-[70%] text-center sm:w-[52%]">
+            <Reveal>
+              <p className="text-[0.5rem] uppercase tracking-[0.3em] text-[#a7833d] sm:text-[0.65rem]">
+                Counting the moments
               </p>
-            ) : (
-              <div className="mt-8 grid grid-cols-4 gap-2 sm:gap-3">
-                {units.map((u) => (
-                  <div
-                    key={u.label}
-                    className="rounded-xl border border-white/30 bg-[#6b2b38]/35 px-1 py-3 text-center shadow-[0_8px_25px_rgba(45,12,22,0.18)] sm:py-4"
-                  >
-                    <p className="tabular text-xl font-light text-[#fff8ef] drop-shadow-[0_1px_4px_rgba(0,0,0,0.45)] sm:text-2xl">
-                      {u.value}
-                    </p>
-                    <p className="mt-1 text-[0.5rem] uppercase tracking-[0.2em] text-champagne sm:text-[0.58rem]">
-                      {u.label}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            )}
-          </Reveal>
+              <h3 className="font-script mt-1 text-xl leading-tight text-[#4d1f29] sm:mt-2 sm:text-4xl">
+                The Celebration Begins In
+              </h3>
+            </Reveal>
+
+            <Reveal delay={0.1}>
+              {c?.isPast ? (
+                <p className="font-script mt-4 text-3xl text-[#4d1f29] sm:mt-6 sm:text-5xl">
+                  Today Is The Day ♡
+                </p>
+              ) : (
+                <div className="mt-3 grid grid-cols-4 sm:mt-6">
+                  {units.map((u, i) => (
+                    <div
+                      key={u.label}
+                      className={`px-1 text-center ${
+                        i > 0 ? "border-l border-[#b8934a]/40" : ""
+                      }`}
+                    >
+                      <p className="tabular text-2xl font-light leading-none text-[#4d1f29] sm:text-4xl">
+                        {u.value}
+                      </p>
+                      <p className="mt-1.5 text-[0.45rem] uppercase tracking-[0.18em] text-[#a7833d] sm:mt-2 sm:text-[0.62rem]">
+                        {u.label}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </Reveal>
+          </div>
         </div>
       </div>
     </section>

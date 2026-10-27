@@ -7,17 +7,7 @@ import { Reveal } from "./Reveal";
 
 export function VenueSection() {
   return (
-    <section
-      className="relative bg-transparent px-6 py-20"
-      style={{
-        background: "transparent",
-        backgroundColor: "transparent",
-        backgroundImage: "none",
-        backdropFilter: "none",
-        WebkitBackdropFilter: "none",
-        boxShadow: "none",
-      }}
-    >
+    <section className="relative bg-[#f2ebe1] px-6 py-20">
       <div className="relative mx-auto max-w-md">
         <Reveal>
           <SectionHeading
@@ -36,7 +26,7 @@ export function VenueSection() {
               loading="lazy"
               width={1200}
               height={1044}
-              className="h-auto w-full max-w-[26rem] drop-shadow-[0_12px_24px_rgba(77,31,41,0.18)] sm:max-w-none"
+              className="h-auto w-full max-w-[17rem] mix-blend-multiply sm:max-w-[20rem]"
             />
           </div>
         </Reveal>
@@ -44,12 +34,12 @@ export function VenueSection() {
         <Reveal delay={0.2}>
           <div className="mt-6 text-center">
             {/* Venue name - deep burgundy */}
-            <h3 className="text-lg font-semibold uppercase tracking-[0.2em] text-[#4d1f29] drop-shadow-[0_0_8px_rgba(251,245,230,0.9)]">
+            <h3 className="text-lg font-semibold uppercase tracking-[0.2em] text-[#4d1f29]">
               {wedding.venue.name}
             </h3>
 
             {/* Address - dark olive */}
-            <p className="mt-2 text-sm font-medium leading-relaxed text-[#3f4a2c] drop-shadow-[0_0_8px_rgba(251,245,230,0.9)]">
+            <p className="mt-2 text-sm font-medium leading-relaxed text-[#3f4a2c]">
               {wedding.venue.address}
             </p>
 

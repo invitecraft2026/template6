@@ -86,7 +86,8 @@
   --deep-text: oklch(0.4438 0.0248 68);
   --soft-white: oklch(0.9914 0.0053 89);
 
-  --background: var(--ivory);
+  /* Website background #f2ebe1 (same color, written in oklch) */
+  --background: oklch(0.9428 0.0153 77.1);
   --foreground: var(--deep-text);
   --card: var(--soft-white);
   --card-foreground: var(--deep-text);
@@ -226,12 +227,13 @@
 
 
 
+/* ===== Website background: #f2ebe1 ===== */
 html,
 body,
 #root {
   margin: 0;
   min-height: 100%;
-  background: #4d1f29;
+  background: #f2ebe1;
 }
 
 html {
@@ -240,7 +242,7 @@ html {
 
 body {
   overflow-x: hidden;
-  background-color: #4d1f29;
+  background-color: #f2ebe1;
 }
 
 video {

@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import { wedding } from "@/config/wedding";
-import countdownBg from "@/assets/countdown-bg-landscape.jpg";
+import countdownBg from "@/assets/countdown-bg.jpg";
 
 import { Reveal } from "./Reveal";
-import { CornerFrame, SectionHeading } from "./Ornament";
 
 function getTimeLeft(targetDate: string) {
   const target = new Date(targetDate).getTime();
@@ -56,10 +55,11 @@ function getTimeLeft(targetDate: string) {
 }
 
 const numberClass =
-  "text-3xl font-normal tracking-wide text-[#fff8ef] drop-shadow-[0_2px_6px_rgba(0,0,0,0.55)] sm:text-5xl";
+  "tabular text-2xl font-light leading-none text-[#4d1f29] sm:text-4xl";
 
 const labelClass =
-  "mt-1 text-[0.62rem] font-semibold uppercase tracking-[0.15em] text-[#e8cf9a] drop-shadow-[0_1px_4px_rgba(0,0,0,0.55)] sm:mt-2 sm:text-sm sm:tracking-[0.25em]";
+  "mt-1.5 text-[0.45rem] font-medium uppercase tracking-[0.18em] text-[#a7833d] sm:mt-2 sm:text-[0.62rem]";
+
 export function SaveTheDate() {
   const [timeLeft, setTimeLeft] = useState(() =>
     getTimeLeft(wedding.dateISO)
@@ -73,72 +73,59 @@ export function SaveTheDate() {
     return () => clearInterval(timer);
   }, []);
 
+  const units = [
+    { label: "Days", value: timeLeft.days },
+    { label: "Hours", value: timeLeft.hours },
+    { label: "Minutes", value: timeLeft.minutes },
+    { label: "Seconds", value: timeLeft.seconds },
+  ];
+
   return (
-    <section
-      className="relative overflow-hidden bg-transparent px-0 py-6 sm:px-6 sm:py-20"
-      style={{
-        background: "transparent",
-        backgroundColor: "transparent",
-        backgroundImage: "none",
-        backdropFilter: "none",
-        WebkitBackdropFilter: "none",
-        boxShadow: "none",
-      }}
-    >
-      {/* Background image wrapper: fixed shape so the whole design stays visible */}
-      <div className="relative mx-auto flex aspect-[16/10] w-full items-center justify-center overflow-hidden sm:aspect-[16/9] sm:max-w-3xl">
+    <section className="relative overflow-hidden bg-[#f2ebe1] px-0 py-6 sm:px-6 sm:py-16">
+      {/* 4:3 on mobile (sides crop evenly, ribbon frame stays visible),
+          16:9 on larger screens (the full image) */}
+      <div className="relative mx-auto aspect-[4/3] w-full overflow-hidden sm:aspect-[16/9] sm:max-w-3xl">
+        {/* Background image */}
         <img
           src={countdownBg}
           alt=""
           aria-hidden="true"
-          className="absolute inset-0 h-full w-full object-fill sm:object-cover"
+          draggable={false}
+          className="absolute inset-0 h-full w-full select-none object-cover object-center"
         />
 
-        <div className="relative z-10 mx-auto w-full max-w-md px-8 py-6 text-center sm:px-16 sm:py-12">
-          <CornerFrame />
-
-          {/* Heading is scaled down on mobile only */}
-          <div className="[zoom:0.6] sm:[zoom:1]">
+        {/* Content, centered inside the ribbon frame */}
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="w-[70%] text-center sm:w-[52%]">
             <Reveal>
-              <SectionHeading
-                title="The Celebration Begins"
-                script
-              />
+              <h3 className="font-script text-2xl leading-tight text-[#4d1f29] sm:text-5xl">
+                The Celebration Begins
+              </h3>
+            </Reveal>
+
+            <Reveal delay={0.1}>
+              <div className="mt-3 grid grid-cols-4 sm:mt-7">
+                {units.map((u, i) => (
+                  <div
+                    key={u.label}
+                    className={`px-1 ${
+                      i > 0 ? "border-l border-[#b8934a]/40" : ""
+                    }`}
+                  >
+                    <p className={numberClass}>{u.value}</p>
+                    <p className={labelClass}>{u.label}</p>
+                  </div>
+                ))}
+              </div>
+            </Reveal>
+
+            <Reveal delay={0.2}>
+              {/* Time line */}
+              <p className="mt-3 text-[0.6rem] font-medium italic text-[#702b3b] sm:mt-7 sm:text-sm">
+                {wedding.time}
+              </p>
             </Reveal>
           </div>
-
-          <Reveal delay={0.1}>
-            <div className="mt-3 sm:mt-10">
-              <div className="grid grid-cols-4 gap-2 sm:mt-8 sm:gap-4">
-                <div>
-                  <p className={numberClass}>{timeLeft.days}</p>
-                  <p className={labelClass}>Days</p>
-                </div>
-
-                <div>
-                  <p className={numberClass}>{timeLeft.hours}</p>
-                  <p className={labelClass}>Hours</p>
-                </div>
-
-                <div>
-                  <p className={numberClass}>{timeLeft.minutes}</p>
-                  <p className={labelClass}>Minutes</p>
-                </div>
-
-                <div>
-                  <p className={numberClass}>{timeLeft.seconds}</p>
-                  <p className={labelClass}>Seconds</p>
-                </div>
-              </div>
-            </div>
-          </Reveal>
-
-          <Reveal delay={0.2}>
-            {/* Time line - light gold */}
-            <p className="mt-3 text-center text-[0.65rem] font-medium italic text-[#e8cf9a] drop-shadow-[0_1px_4px_rgba(0,0,0,0.55)] sm:mt-8 sm:text-sm">
-              {wedding.time}
-            </p>
-          </Reveal>
         </div>
       </div>
     </section>

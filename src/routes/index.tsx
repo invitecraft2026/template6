@@ -110,9 +110,11 @@ function Index() {
         >
           <HeroSection start={introDone} />
 
+          <InvitationMessage />
+
           <ScratchReveal />
 
-          <InvitationMessage />
+          
 
           <EventTimeline />
 

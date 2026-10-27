@@ -17,16 +17,7 @@ const illustrationByIcon: Record<WeddingEvent["icon"], string> = {
 
 export function EventTimeline() {
   return (
-    <section
-      className="relative bg-transparent px-6 py-20"
-      style={{
-        backgroundColor: "transparent",
-        backgroundImage: "none",
-        backdropFilter: "none",
-        WebkitBackdropFilter: "none",
-        boxShadow: "none",
-      }}
-    >
+    <section className="relative bg-[#f2ebe1] px-6 py-20">
       <div className="relative mx-auto max-w-md">
         <Reveal>
           <SectionHeading
@@ -85,15 +76,15 @@ export function EventTimeline() {
 
                         {/* Event info */}
                         <div className="pl-3 text-left">
-                          <p className="font-script text-2xl text-[#4d1f29] drop-shadow-[0_0_8px_rgba(251,245,230,0.9)] sm:text-3xl">
+                          <p className="font-script text-2xl text-[#4d1f29] drop-shadow-[0_0_8px_rgba(242,235,225,0.9)] sm:text-3xl">
                             {event.time}
                           </p>
 
-                          <h3 className="mt-1 text-sm font-bold uppercase leading-snug tracking-[0.1em] text-[#3f4a2c] drop-shadow-[0_0_8px_rgba(251,245,230,0.9)] sm:text-base">
+                          <h3 className="mt-1 text-sm font-bold uppercase leading-snug tracking-[0.1em] text-[#3f4a2c] drop-shadow-[0_0_8px_rgba(242,235,225,0.9)] sm:text-base">
                             {event.title}
                           </h3>
 
-                          <p className="mt-1 text-sm font-medium leading-snug text-[#4a5535] drop-shadow-[0_0_8px_rgba(251,245,230,0.9)]">
+                          <p className="mt-1 text-sm font-medium leading-snug text-[#4a5535] drop-shadow-[0_0_8px_rgba(242,235,225,0.9)]">
                             {event.venue}
                           </p>
                         </div>
@@ -102,15 +93,15 @@ export function EventTimeline() {
                       <>
                         {/* Event info */}
                         <div className="pr-3 text-right">
-                          <p className="font-script text-2xl text-[#4d1f29] drop-shadow-[0_0_8px_rgba(251,245,230,0.9)] sm:text-3xl">
+                          <p className="font-script text-2xl text-[#4d1f29] drop-shadow-[0_0_8px_rgba(242,235,225,0.9)] sm:text-3xl">
                             {event.time}
                           </p>
 
-                          <h3 className="mt-1 text-sm font-bold uppercase leading-snug tracking-[0.1em] text-[#3f4a2c] drop-shadow-[0_0_8px_rgba(251,245,230,0.9)] sm:text-base">
+                          <h3 className="mt-1 text-sm font-bold uppercase leading-snug tracking-[0.1em] text-[#3f4a2c] drop-shadow-[0_0_8px_rgba(242,235,225,0.9)] sm:text-base">
                             {event.title}
                           </h3>
 
-                          <p className="mt-1 text-sm font-medium leading-snug text-[#4a5535] drop-shadow-[0_0_8px_rgba(251,245,230,0.9)]">
+                          <p className="mt-1 text-sm font-medium leading-snug text-[#4a5535] drop-shadow-[0_0_8px_rgba(242,235,225,0.9)]">
                             {event.venue}
                           </p>
                         </div>

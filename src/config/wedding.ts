@@ -1,7 +1,8 @@
 /**
  * CENTRAL WEDDING CONFIGURATION
  * Every editable detail of the invitation lives here.
- * Replace the placeholder values below with the real wedding details.
+ * Temporary placeholder details (couple initials: A & B).
+ * Replace the values below with the real wedding details.
  */
 
 export type WeddingEvent = {
@@ -15,18 +16,18 @@ export type WeddingEvent = {
 
 export const wedding = {
   bride: {
-    firstName: "Emma",
-    fullName: "Emma Carter",
-    parents: "Daughter of Mr. Richard Carter & Mrs. Laura Carter",
+    firstName: "Amelia",
+    fullName: "Amelia Anderson",
+    parents: "Daughter of Mr. Arthur Anderson & Mrs. Alice Anderson",
   },
 
   groom: {
-    firstName: "Daniel",
-    fullName: "Daniel Brooks",
-    parents: "Son of Mr. James Brooks & Mrs. Helen Brooks",
+    firstName: "Benjamin",
+    fullName: "Benjamin Brooks",
+    parents: "Son of Mr. Bernard Brooks & Mrs. Beatrice Brooks",
   },
 
-  initials: "E & D",
+  initials: "A & B",
 
   /** Human readable date + time */
   date: "Saturday, 15 May 2027",
@@ -49,9 +50,9 @@ export const wedding = {
   welcomeJoin: "of",
 
   venue: {
-    name: "The Willow Garden Estate",
+    name: "The Aurelia Bay Estate",
     address: "Lakeview Road, Kakkanad, Kochi, Kerala 682030",
-    mapsQuery: "The Willow Garden Estate, Kakkanad, Kochi",
+    mapsQuery: "The Aurelia Bay Estate, Kakkanad, Kochi",
   },
 
   events: [
@@ -60,7 +61,7 @@ export const wedding = {
       title: "Welcome Drinks",
       date: "Friday, 14 May 2027",
       time: "6:30 PM",
-      venue: "The Willow Garden Estate, Lawn",
+      venue: "The Aurelia Bay Estate, Lawn",
       icon: "lantern",
     },
 
@@ -69,7 +70,7 @@ export const wedding = {
       title: "Wedding Ceremony",
       date: "Saturday, 15 May 2027",
       time: "4:00 PM",
-      venue: "The Willow Garden Estate",
+      venue: "The Aurelia Bay Estate",
       icon: "crescent",
     },
 
@@ -78,7 +79,7 @@ export const wedding = {
       title: "Reception",
       date: "Saturday, 15 May 2027",
       time: "5:30 PM",
-      venue: "The Willow Garden Estate, Ballroom",
+      venue: "The Aurelia Bay Estate, Ballroom",
       icon: "rings",
     },
 
@@ -87,7 +88,7 @@ export const wedding = {
       title: "Farewell Brunch",
       date: "Sunday, 16 May 2027",
       time: "10:30 AM",
-      venue: "The Willow Garden Estate, Terrace",
+      venue: "The Aurelia Bay Estate, Terrace",
       icon: "dinner",
     },
   ] satisfies WeddingEvent[],

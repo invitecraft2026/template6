@@ -1,36 +1,61 @@
 import { motion } from "framer-motion";
 import { wedding } from "@/config/wedding";
 
-import floralBackground from "@/assets/last_frame_from_Burgundy_velvet.png";
+// 👉 Replace src/assets/hero-section-image.jpg with the new image
+//    (the sage lace one with the oval and the ivory strip at the bottom)
+import floralBackground from "@/assets/hero-section-image.jpg";
+
+/**
+ * IMAGE GEOMETRY (measured on the 1438 x 2576 image)
+ * The text is placed in % of the image and sized in cqw (1cqw = 1% of the
+ * image width), so it always stays inside the white oval on every screen.
+ * If you ever swap the image, only change the numbers below.
+ */
+const IMG_W = 1438;
+const IMG_H = 2576;
+
+const OVAL_CX = 722; // horizontal center of the oval
+const OVAL_CY = 1065; // vertical center of the oval
+const STRIP_START = 2194; // where the flat ivory strip at the bottom begins
+
+/** Website background color: the bottom of the image fades into this */
+const PAGE_BG = "#f2ebe1";
+
+/**
+ * BOTTOM FADE (in % of the image height)
+ * The image is fully visible down to FADE_START, then melts into the page
+ * background and is completely gone at FADE_END. The oval (it ends at about
+ * 71%) is never touched. Only the bottom of the image fades.
+ */
+const FADE_START = 74;
+const FADE_END = 92;
+
+const bottomFade = `linear-gradient(to bottom, #000 0%, #000 ${FADE_START}%, transparent ${FADE_END}%)`;
 
 export function HeroSection({ start }: { start: boolean }) {
-  // Fades the last 56px of the background into the page, so the hero has no hard bottom edge
-  const fadeBottom =
-    "linear-gradient(to bottom, #000 calc(100% - 56px), transparent 100%)";
-
   return (
-    <section className="relative min-h-[100svh] w-full overflow-hidden bg-transparent">
-      {/* Floral background: white base + image, bottom edge faded out */}
+    <section
+      className="relative w-full overflow-hidden"
+      style={{ backgroundColor: PAGE_BG }}
+    >
+      {/* Image + everything on it share one box, so positions stay exact */}
       <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 z-0 bg-white"
-        style={{
-          WebkitMaskImage: fadeBottom,
-          maskImage: fadeBottom,
-        }}
+        className="relative mx-auto w-full max-w-[560px]"
+        style={{ containerType: "inline-size" }}
       >
+        {/* Background image: full clarity, only the bottom edge fades out */}
         <img
           src={floralBackground}
           alt=""
-          className="h-full w-full object-cover object-center"
+          draggable={false}
+          className="pointer-events-none block h-auto w-full select-none"
+          style={{
+            WebkitMaskImage: bottomFade,
+            maskImage: bottomFade,
+          }}
         />
 
-        {/* Optional subtle ivory overlay for text readability */}
-        <div className="absolute inset-0 bg-white/10" />
-      </div>
-
-      {/* Hero content */}
-      <div className="relative z-10 flex min-h-[100svh] flex-col items-center justify-center px-6 py-14 text-center">
+        {/* Title block: centered inside the oval */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{
@@ -42,52 +67,88 @@ export function HeroSection({ start }: { start: boolean }) {
             delay: 0.35,
             ease: [0.22, 1, 0.36, 1],
           }}
-          className="mx-auto max-w-sm"
+          className="absolute flex flex-col items-center text-center"
+          style={{
+            left: `${(OVAL_CX / IMG_W) * 100}%`,
+            top: `${(OVAL_CY / IMG_H) * 100}%`,
+            width: "52cqw",
+            translate: "-50% -50%",
+          }}
         >
-          <p className="tracking-luxe text-[0.62rem] font-medium uppercase text-[#7a5a14] drop-shadow-[0_0_8px_rgba(251,245,230,0.9)] sm:text-xs">
+          <p
+            className="font-medium uppercase tracking-luxe text-[#7a5a14]"
+            style={{ fontSize: "max(8px, 2.3cqw)" }}
+          >
             {wedding.welcomeLine}
           </p>
 
-          <h1 className="font-script mt-3 text-[2.75rem] leading-[1.05] text-[#4d1f29] drop-shadow-[0_0_10px_rgba(251,245,230,0.9)] sm:text-[3.5rem]">
+          <h1
+            className="font-script whitespace-nowrap leading-[1.05] text-[#4d1f29]"
+            style={{ fontSize: "7.4cqw", marginTop: "1.8cqw" }}
+          >
             {wedding.welcomeTitle}
           </h1>
 
-          <p className="mt-2 text-xs font-medium italic tracking-wide text-[#3f4a2c] drop-shadow-[0_0_8px_rgba(251,245,230,0.9)]">
+          <p
+            className="font-medium italic tracking-wide text-[#3f4a2c]"
+            style={{ fontSize: "max(9px, 2.8cqw)", marginTop: "1cqw" }}
+          >
             {wedding.welcomeJoin}
           </p>
 
-          <div className="mt-3 flex flex-col items-center">
-            <h2 className="font-script text-5xl leading-none text-[#4d1f29] drop-shadow-[0_0_10px_rgba(251,245,230,0.9)] sm:text-6xl">
+          <div
+            className="flex flex-col items-center"
+            style={{ marginTop: "1.8cqw" }}
+          >
+            <h2
+              className="font-script leading-none text-[#4d1f29]"
+              style={{ fontSize: "10.5cqw" }}
+            >
               {wedding.bride.firstName}
             </h2>
 
-            <span className="font-script -my-1 text-xl text-[#8a6a1c] drop-shadow-[0_0_8px_rgba(251,245,230,0.9)] sm:text-2xl">
+            <span
+              className="font-script text-[#8a6a1c]"
+              style={{ fontSize: "5.2cqw", margin: "-0.6cqw 0" }}
+            >
               &amp;
             </span>
 
-            <h2 className="font-script text-5xl leading-none text-[#4d1f29] drop-shadow-[0_0_10px_rgba(251,245,230,0.9)] sm:text-6xl">
+            <h2
+              className="font-script leading-none text-[#4d1f29]"
+              style={{ fontSize: "10.5cqw" }}
+            >
               {wedding.groom.firstName}
             </h2>
           </div>
         </motion.div>
 
-        {/* Scroll hint */}
+        {/* Scroll hint: sits in the faded area at the bottom of the image */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: start ? 1 : 0 }}
           transition={{ duration: 1, delay: 0.9 }}
-          className="absolute inset-x-0 bottom-10 mx-auto max-w-sm"
+          className="absolute inset-x-0 flex flex-col items-center"
+          style={{
+            top: `${((STRIP_START + 90) / IMG_H) * 100}%`,
+          }}
         >
-          <p className="text-[0.6rem] font-medium uppercase tracking-[0.28em] text-[#3f4a2c] drop-shadow-[0_0_8px_rgba(251,245,230,0.9)]">
+          <p
+            className="font-medium uppercase tracking-[0.28em] text-[#3f4a2c]"
+            style={{ fontSize: "max(8px, 2cqw)" }}
+          >
             Scroll to discover
           </p>
 
           <motion.svg
-            width="18"
-            height="18"
             viewBox="0 0 24 24"
             aria-hidden="true"
-            className="mx-auto mt-2 text-[#7a5a14]"
+            className="text-[#7a5a14]"
+            style={{
+              width: "max(14px, 4cqw)",
+              height: "max(14px, 4cqw)",
+              marginTop: "1cqw",
+            }}
             animate={start ? { y: [0, 6, 0] } : { y: 0 }}
             transition={{
               duration: 1.4,
